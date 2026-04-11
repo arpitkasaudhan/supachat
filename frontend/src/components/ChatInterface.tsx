@@ -1,5 +1,11 @@
 "use client";
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
+
+const uuid = () =>
+  "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+  });
 import { Send, Bot, User, AlertCircle, Zap, BarChart2 } from "lucide-react";
 import { sendQuery, QueryResult, HistoryItem } from "@/lib/api";
 import ResultsTable from "./ResultsTable";
@@ -48,7 +54,7 @@ export default function ChatInterface() {
     if (!query.trim() || loading) return;
 
     const userMsg: Message = {
-      id: crypto.randomUUID(),
+      id: uuid(),
       role: "user",
       content: query.trim(),
       timestamp: new Date(),
@@ -60,7 +66,7 @@ export default function ChatInterface() {
     try {
       const result = await sendQuery(query.trim(), buildApiHistory());
       const assistantMsg: Message = {
-        id: crypto.randomUUID(),
+        id: uuid(),
         role: "assistant",
         content: result.message,
         result,
@@ -75,7 +81,7 @@ export default function ChatInterface() {
       setMessages((prev) => [
         ...prev,
         {
-          id: crypto.randomUUID(),
+          id: uuid(),
           role: "error",
           content: err instanceof Error ? err.message : "Unknown error",
           timestamp: new Date(),
