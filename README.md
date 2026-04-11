@@ -2,7 +2,7 @@
 
 A full-stack conversational analytics app that lets you query a **blog analytics PostgreSQL database** in natural language. Built with Next.js, FastAPI, Supabase, and the Claude AI API (MCP tool-use pattern).
 
-> Built as part of the analytos.ai AI DevOps Engineer task.  
+> Built as part of the analytos.ai AI DevOps Engineer task. Live at http://13.233.224.220  
 > AI tools used: **Claude Code** (code generation, scaffolding, DevOps config), **Groq API / LLaMA 3.3-70b** (NL→SQL via MCP tool-use pattern, DevOps Agent)
 
 ---
