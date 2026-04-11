@@ -81,14 +81,8 @@ jobs:
             set -e
             cd /opt/supachat
 
-            # Pull latest images
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker pull ghcr.io/${{ env.IMAGE_BACKEND }}:${{ github.sha }}
-            docker pull ghcr.io/${{ env.IMAGE_FRONTEND }}:${{ github.sha }}
-
-            # Update image tags in compose env
-            export BACKEND_IMAGE=ghcr.io/${{ env.IMAGE_BACKEND }}:${{ github.sha }}
-            export FRONTEND_IMAGE=ghcr.io/${{ env.IMAGE_FRONTEND }}:${{ github.sha }}
+            # Pull latest source code
+            git pull origin main
 
             # Rolling restart — backend first, then frontend
             docker compose pull backend || true
